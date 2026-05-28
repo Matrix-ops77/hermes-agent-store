@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOUL Pack Essentials — Hermes Agent Store</title>
+  <meta name="description" content="The core SOUL.md templates that define how your agent thinks, acts, and evolves. 12 battle-tested configurations for $29.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg-primary: #030712;
+      --bg-secondary: #0a0f1c;
+      --bg-card: #111827;
+      --border: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #7c3aed;
+      --accent-hover: #6d28d9;
+      --accent-glow: rgba(124, 58, 237, 0.4);
+      --success: #10b981;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Layout */
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 280px;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+    
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+    }
+    
+    .logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    .nav-section {
+      margin-bottom: 32px;
+    }
+    
+    .nav-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+      margin-bottom: 4px;
+    }
+    
+    .nav-item:hover, .nav-item.active {
+      background: rgba(124, 58, 237, 0.1);
+      color: var(--text-primary);
+    }
+    
+    .nav-item.active {
+      background: rgba(124, 58, 237, 0.15);
+      border-left: 3px solid var(--accent);
+      margin-left: -3px;
+    }
+    
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      opacity: 0.7;
+    }
+    
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .sidebar-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .user-info {
+      flex: 1;
+    }
+    
+    .user-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .user-status {
+      font-size: 12px;
+      color: var(--success);
+    }
+    
+    /* Main Content */
+    .main {
+      flex: 1;
+      margin-left: 280px;
+      padding: 48px 64px;
+      max-width: 1200px;
+    }
+    
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 0 64px;
+    }
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124, 58, 237, 0.15);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #a78bfa;
+      margin-bottom: 24px;
+    }
+    
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    
+    .price-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .price {
+      font-size: 72px;
+      font-weight: 900;
+      color: var(--text-primary);
+    }
+    
+    .price-period {
+      font-size: 18px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    
+    .price-original {
+      font-size: 24px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 40px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px var(--accent-glow);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 16px;
+      padding: 16px 32px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+    
+    .btn-secondary:hover {
+      background: var(--border);
+    }
+    
+    /* Stats Bar */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 64px 0;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    
+    /* Features Section */
+    .section {
+      margin-bottom: 80px;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .section h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    
+    .section-desc {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s;
+    }
+    
+    .feature-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(124, 58, 237, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+    
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Modules List */
+    .modules-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    
+    .module-item {
+      display: flex;
+      align-items: center;
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    
+    .module-item:last-child {
+      border-bottom: none;
+    }
+    
+    .module-item:hover {
+      background: rgba(124, 58, 237, 0.05);
+    }
+    
+    .module-number {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      margin-right: 24px;
+    }
+    
+    .module-content {
+      flex: 1;
+    }
+    
+    .module-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .module-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .module-tag {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      padding: 6px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    /* Social Proof */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    
+    .testimonial {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    
+    .testimonial-content {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    
+    .author-info {
+      flex: 1;
+    }
+    
+    .author-name {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    
+    .author-role {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .testimonial-rating {
+      color: #fbbf24;
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+    
+    /* Final CTA */
+    .final-cta {
+      background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 64px;
+      text-align: center;
+    }
+    
+    .final-cta h2 {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    
+    .final-cta p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    
+    .guarantee {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    
+    .guarantee-icon {
+      width: 24px;
+      height: 24px;
+      background: rgba(16, 185, 129, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--success);
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-icon">H</div>
+        <span class="logo-text">Hermes Store</span>
+      </div>
+      
+      <nav class="nav-section">
+        <div class="nav-label">Products</div>
+        <a href="#home" class="nav-item active">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          Home
+        </a>
+        <a href="#modules" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+          Modules
+        </a>
+        <a href="#features" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+          Features
+        </a>
+        <a href="#reviews" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          Reviews
+        </a>
+      </nav>
+      
+      <nav class="nav-section">
+        <div class="nav-label">Other Packs</div>
+        <a href="#" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          SOUL Pack Pro
+        </a>
+        <a href="#" class="nav-item">
+          <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          Premium Dashboard
+        </a>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar">W</div>
+          <div class="user-info">
+            <div class="user-name">Wayne Dellmyer</div>
+            <div class="user-status">● Online</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main" id="home">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          12 Battle-Tested Configurations
+        </div>
+        <h1>SOUL Pack Essentials</h1>
+        <p class="hero-subtitle">The core SOUL.md templates that define how your agent thinks, acts, and evolves. Trusted by 500+ Hermes power users.</p>
+        
+        <div class="price-container">
+          <span class="price-original">$97</span>
+          <div class="price">$29</div>
+          <span class="price-period">one-time payment</span>
+        </div>
+        
+        <div class="cta-buttons">
+          <a href="#" class="btn-primary">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            Buy Now — $29
+          </a>
+          <a href="#modules" class="btn-secondary">
+            View All Modules
+          </a>
+        </div>
+      </section>
+      
+      <!-- Stats Bar -->
+      <div class="stats-bar">
+        <div class="stat">
+          <div class="stat-value">500+</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">12</div>
+          <div class="stat-label">SOUL Modules</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4.9★</div>
+          <div class="stat-label">Avg Rating</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">24/7</div>
+          <div class="stat-label">Agent Support</div>
+        </div>
+      </div>
+      
+      <!-- 12 Modules Section -->
+      <section class="section" id="modules">
+        <div class="section-header">
+          <h2>All 12 SOUL Modules</h2>
+          <p class="section-desc">Each module is a battle-tested configuration that transforms how your agent operates.</p>
+        </div>
+        
+        <div class="modules-container">
+          <div class="module-item">
+            <div class="module-number">01</div>
+            <div class="module-content">
+              <div class="module-name">Core Identity Framework</div>
+              <div class="module-desc">Defines the fundamental personality and core values your agent embodies</div>
+            </div>
+            <span class="module-tag">Essential</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">02</div>
+            <div class="module-content">
+              <div class="module-name">Task Execution Engine</div>
+              <div class="module-desc">Optimized workflows for completing complex multi-step tasks</div>
+            </div>
+            <span class="module-tag">Essential</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">03</div>
+            <div class="module-content">
+              <div class="module-name">Context Memory System</div>
+              <div class="module-desc">Long-term memory handling for consistent conversation context</div>
+            </div>
+            <span class="module-tag">Essential</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">04</div>
+            <div class="module-content">
+              <div class="module-name">Communication Protocol</div>
+              <div class="module-desc">Clear, structured output formats for professional interactions</div>
+            </div>
+            <span class="module-tag">Essential</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">05</div>
+            <div class="module-content">
+              <div class="module-name">Error Recovery System</div>
+              <div class="module-desc">Graceful handling of failures with automatic correction paths</div>
+            </div>
+            <span class="module-tag">Essential</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">06</div>
+            <div class="module-content">
+              <div class="module-name">Learning Adaptation Layer</div>
+              <div class="module-desc">Self-improvement mechanisms that evolve based on interactions</div>
+            </div>
+            <span class="module-tag">Advanced</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">07</div>
+            <div class="module-content">
+              <div class="module-name">Priority Scheduling Matrix</div>
+              <div class="module-desc">Intelligent task prioritization based on urgency and impact</div>
+            </div>
+            <span class="module-tag">Advanced</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">08</div>
+            <div class="module-content">
+              <div class="module-name">Knowledge Integration Hub</div>
+              <div class="module-desc">Seamless incorporation of external knowledge sources</div>
+            </div>
+            <span class="module-tag">Advanced</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">09</div>
+            <div class="module-content">
+              <div class="module-name">Safety Guardrails Config</div>
+              <div class="module-desc">Ethical boundaries and content filtering systems</div>
+            </div>
+            <span class="module-tag">Essential</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">10</div>
+            <div class="module-content">
+              <div class="module-name">Multiturn Conversation Manager</div>
+              <div class="module-desc">Handles extended dialogues with coherent state management</div>
+            </div>
+            <span class="module-tag">Advanced</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">11</div>
+            <div class="module-content">
+              <div class="module-name">Output Formatting Suite</div>
+              <div class="module-desc">Professional templates for code, documents, and structured data</div>
+            </div>
+            <span class="module-tag">Essential</span>
+          </div>
+          
+          <div class="module-item">
+            <div class="module-number">12</div>
+            <div class="module-content">
+              <div class="module-name">System Health Monitor</div>
+              <div class="module-desc">Self-diagnostic capabilities for optimal performance tracking</div>
+            </div>
+            <span class="module-tag">Advanced</span>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Features Breakdown -->
+      <section class="section" id="features">
+        <div class="section-header">
+          <h2>What's Included</h2>
+          <p class="section-desc">Everything you need to transform a generic AI into a purpose-built agent.</p>
+        </div>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📋</div>
+            <h3>Production-Ready Templates</h3>
+            <p>All 12 modules are tested in real-world scenarios. Copy, paste, and deploy in minutes.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Instant Integration</h3>
+            <p>Designed for Hermes Agent compatibility. Drop into your configuration with zero friction.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <h3>Lifetime Updates</h3>
+            <p>As Hermes evolves, your SOUL Pack evolves. All future module updates included free.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Usage Analytics</h3>
+            <p>Track which modules drive the most value with built-in performance metrics.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Enterprise Security</h3>
+            <p>Your agent configurations stay private. No data sharing, no external dependencies.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🌍</div>
+            <h3>Global CDN</h3>
+            <p>Access your SOUL Pack from anywhere with blazing fast content delivery.</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Social Proof / Reviews -->
+      <section class="section" id="reviews">
+        <div class="section-header">
+          <h2>Trusted by 500+ Users</h2>
+          <p class="section-desc">See what the community is saying about SOUL Pack Essentials.</p>
+        </div>
+        
+        <div class="testimonials">
+          <div class="testimonial">
+            <div class="testimonial-rating">★★★★★</div>
+            <p class="testimonial-content">"This completely transformed how my agent operates. The Context Memory System alone saved me hours of debugging. Worth every penny."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">M</div>
+              <div class="author-info">
+                <div class="author-name">Marcus Chen</div>
+                <div class="author-role">AI Engineer, TechCorp</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial">
+            <div class="testimonial-rating">★★★★★</div>
+            <p class="testimonial-content">"I was skeptical at first, but the Production-Ready Templates are genuinely battle-tested. My agents now handle complex workflows flawlessly."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">S</div>
+              <div class="author-info">
+                <div class="author-name">Sarah Williams</div>
+                <div class="author-role">Product Manager, DataFlow</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial">
+            <div class="testimonial-rating">★★★★★</div>
+            <p class="testimonial-content">"The Safety Guardrails Config is gold. I sleep better knowing my agents operate within clear ethical boundaries. Professional-grade tooling."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">J</div>
+              <div class="author-info">
+                <div class="author-name">James Rodriguez</div>
+                <div class="author-role">CTO, ScaleAI</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial">
+            <div class="testimonial-rating">★★★★★</div>
+            <p class="testimonial-content">"Lifetime updates and the Learning Adaptation Layer are incredible. My agent gets smarter with every interaction. Best investment this year."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">E</div>
+              <div class="author-info">
+                <div class="author-name">Emily Park</div>
+                <div class="author-role">Research Lead, Neural Labs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Final CTA -->
+      <section class="final-cta">
+        <h2>Ready to Upgrade Your Agent?</h2>
+        <p>Join 500+ power users who have transformed their Hermes experience.</p>
+        <a href="#" class="btn-primary">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          Get SOUL Pack Essentials — $29
+        </a>
+        <div class="guarantee">
+          <span class="guarantee-icon">✓</span>
+          30-day money-back guarantee • Instant access • Lifetime updates
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
