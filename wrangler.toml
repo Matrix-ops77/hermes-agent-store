@@ -1,0 +1,17 @@
+name = "hermes-agent-store"
+compatibility_date = "2024-12-01"
+pages_build_output_dir = ".next"
+
+# KV namespace for session storage (create via: wrangler kv:namespace create "HERMES_CACHE")
+# kv_namespaces = [
+#   { binding = "HERMES_CACHE", id = "YOUR_KV_ID" }
+# ]
+
+# D1 database for structured data (create via: wrangler d1 create hermes_store)
+# d1_databases = [
+#   { binding = "DB", id = "YOUR_D1_ID" }
+# ]
+
+[vars]
+SITE_URL = "https://hermesagent.qzz.io"
+ENVIRONMENT = "production"
