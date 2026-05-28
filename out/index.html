@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hermes Agent — SOUL Packs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #08090a;
+      --panel: #0f1011;
+      --surface: #191a1b;
+      --text: #f7f8f8;
+      --text-secondary: #d0d6e0;
+      --accent: #7170ff;
+      --accent-hover: #5c5ce0;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    html {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 0;
+    }
+
+    .sidebar-logo {
+      padding: 0 20px 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .sidebar-logo h1 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .sidebar-logo span {
+      color: var(--accent);
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 0 12px;
+    }
+
+    .sidebar-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .sidebar-nav a.active {
+      color: var(--accent);
+    }
+
+    .sidebar-footer {
+      padding: 20px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .sidebar-footer p {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Main Content */
+    .main {
+      margin-left: 240px;
+      flex: 1;
+      padding: 48px 64px;
+      max-width: 1200px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 64px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 64px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+
+    .hero h2 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-description {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 64px;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .section-description {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 560px;
+    }
+
+    /* Feature Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--surface);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+
+    .feature-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Product Cards */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .product-card.pro::before {
+      background: linear-gradient(90deg, #ff6b6b, var(--accent));
+    }
+
+    .product-badge {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .product-card.pro .product-badge {
+      background: rgba(255, 107, 107, 0.1);
+      border-color: rgba(255, 107, 107, 0.2);
+      color: #ff6b6b;
+    }
+
+    .product-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .product-description {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .product-features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .product-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .product-features li:last-child {
+      border-bottom: none;
+    }
+
+    .product-features li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .product-card.pro .product-features li::before {
+      color: #ff6b6b;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .product-price {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-price-amount {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .product-price-note {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Stats */
+    .stats-row {
+      display: flex;
+      gap: 48px;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 64px 0;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .cta-section h3 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h1>Hermes<span>Agent</span></h1>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="active">SOUL Packs</a>
+      <a href="#features">Features</a>
+      <a href="#products">Products</a>
+      <a href="https://discord.gg/hermes-agent" target="_blank">Community</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Built for agents that actually remember who they are.</p>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Hermes Agent SOUL Framework
+      </div>
+      <h2>Give your agent a <em>SOUL</em>.<br>Make it remember.</h2>
+      <p class="hero-description">
+        Drop-in template configurations that transform generic AI agents into persistent, self-aware assistants. 
+        12 battle-tested modules covering identity, memory, communication, and growth.
+      </p>
+      <div class="hero-actions">
+        <a href="#products" class="btn btn-primary">View SOUL Packs →</a>
+        <a href="https://discord.gg/hermes-agent" class="btn btn-secondary" target="_blank">Join Discord</a>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-value">12</span>
+        <span class="stat-label">Core Modules</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">20+</span>
+        <span class="stat-label">Advanced Templates</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">1-click</span>
+        <span class="stat-label">Install</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">SOC 2</span>
+        <span class="stat-label">Ready (Pro)</span>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <section class="section" id="features">
+      <div class="section-header">
+        <div class="section-label">What SOUL Does</div>
+        <h3 class="section-title">Everything an agent needs to be real.</h3>
+        <p class="section-description">
+          SOUL (Self-Operating Unified Logic) is a modular framework for giving AI agents persistent identity, 
+          contextual memory, and meaningful growth over time.
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Identity Framework</h3>
+          <p>Define your agent's mission, values, and behavioral boundaries. It knows who it is and why.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <h3>Memory Architecture</h3>
+          <p>Persistent core memory plus episodic recall. Your agent remembers past sessions, mistakes, and wins.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔧</div>
+          <h3>Tool Philosophy</h3>
+          <p>Explicit rules for how your agent uses its tools. No more random tool-calling chaos.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Communication Style</h3>
+          <p>Voice, tone, formatting preferences. Your agent communicates the way you want it to.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Evolution Tracking</h3>
+          <p>Self-improvement through explicit change logs. Your agent gets better over time, visibly.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Error Recovery</h3>
+          <p>Graceful degradation and explicit recovery protocols. When things go wrong, it handles it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section" id="products">
+      <div class="section-header">
+        <div class="section-label">SOUL Packs</div>
+        <h3 class="section-title">Pick your agent's capacity.</h3>
+        <p class="section-description">
+          From individual identity modules to full multi-agent orchestration frameworks. 
+          Every pack includes lifetime updates.
+        </p>
+      </div>
+      <div class="products-grid">
+        
+        <!-- Essentials -->
+        <div class="product-card">
+          <div class="product-badge">Essentials</div>
+          <h3>SOUL Pack: Essentials</h3>
+          <p class="product-description">
+            The foundational 12-module set for single-agent setups. 
+            Covers identity, memory architecture, communication, and operational resilience.
+          </p>
+          <ul class="product-features">
+            <li>Mission & Identity Framework</li>
+            <li>Core Memory Architecture</li>
+            <li>Episodic Memory System</li>
+            <li>Tool Use Philosophy</li>
+            <li>Communication Style Guide</li>
+            <li>Agent Evolution Tracking</li>
+            <li>Session Onboarding</li>
+            <li>Error Recovery Protocol</li>
+            <li>Context Compression</li>
+            <li>Multi-Session Continuity</li>
+            <li>Knowledge Synthesis</li>
+            <li>Tool Safety Guardrails</li>
+          </ul>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="product-price-amount">$29</span>
+              <span class="product-price-note">One-time purchase</span>
+            </div>
+            <a href="#" class="btn btn-primary">Buy on Gumroad →</a>
+          </div>
+        </div>
+
+        <!-- Pro -->
+        <div class="product-card pro">
+          <div class="product-badge">Pro</div>
+          <h3>SOUL Pack: Pro</h3>
+          <p class="product-description">
+            Everything in Essentials, plus 8 advanced multi-agent templates, 
+            custom skill authoring, and SOC 2 compliance workflows. For teams and serious builds.
+          </p>
+          <ul class="product-features">
+            <li>Everything in Essentials</li>
+            <li>Multi-Agent Orchestration</li>
+            <li>Supervisor-Worker Pattern</li>
+            <li>Hierarchical Delegation</li>
+            <li>Parallel Agent Teams</li>
+            <li>Cross-Agent Memory Sharing</li>
+            <li>Agent Election & Leader</li>
+            <li>Swarm Coordination</li>
+            <li>Custom Skill Authoring Framework</li>
+            <li>SOC 2 Compliance Templates</li>
+            <li>Team Collaboration Patterns</li>
+            <li>Orchestrator Skills Bundle</li>
+          </ul>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="product-price-amount">$79</span>
+              <span class="product-price-note">One-time purchase</span>
+            </div>
+            <a href="#" class="btn btn-primary">Buy on Gumroad →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h3>Questions? Ask the community.</h3>
+      <p>Join thousands of builders using SOUL to create agents that actually feel like they have a mind.</p>
+      <a href="https://discord.gg/hermes-agent" class="btn btn-primary" target="_blank">Join Hermes Agent Discord →</a>
+    </div>
+
+  </main>
+
+</body>
+</html>
